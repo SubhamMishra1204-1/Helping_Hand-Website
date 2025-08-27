@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helping Hand - Complaint Portal</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #74ebd5 0%, #9face6 100%);
+            background-attachment: fixed;
+            color: #222;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        nav {
+            margin-top: 1rem;
+        }
+
+        nav a {
+            color: #ffdd57;
+            font-weight: bold;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 650px;
+            background: white;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        label {
+            display: block;
+            margin-top: 1rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #023e8a;
+        }
+
+        input,
+        select,
+        textarea,
+        button {
+            width: 100%;
+            margin-top: 0.5rem;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            font-weight: 600;
+            outline: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #0077b6;
+            box-shadow: 0px 0px 8px rgba(0, 119, 182, 0.5);
+        }
+
+        button {
+            background: linear-gradient(90deg, #0077b6, #00b4d8);
+            color: white;
+            border: none;
+            margin-top: 1.5rem;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 700;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background: linear-gradient(90deg, #023e8a, #0096c7);
+        }
+
+        .success-message {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #d1e7dd;
+            color: #0f5132;
+            border: 1px solid #badbcc;
+            border-radius: 8px;
+            display: none;
+            font-weight: 600;
+            animation: pop 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pop {
+            from {
+                transform: scale(0.9);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Helping Hand Complaint Portal</h1>
+        <p>Your voice matters. Register your complaints here.</p>
+        <nav>
+            <a href="index.html">Submit Complaint</a> |
+            <a href="status.html">Check Status</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <form id="complaintForm">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" placeholder="Enter your name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Enter your email" required>
+
+            <label for="type">Complaint Type:</label>
+            <select id="type" required>
+                <option value="">-- Select Type --</option>
+                <option value="public">🌍 Public Complaint</option>
+                <option value="private">🔒 Private Complaint</option>
+            </select>
+
+            <label for="complaint">Complaint Details:</label>
+            <textarea id="complaint" rows="4" placeholder="Describe your issue..." required></textarea>
+
+            <button type="submit">🚀 Submit Complaint</button>
+        </form>
+
+        <div id="successMessage" class="success-message">
+            ✅ Complaint submitted successfully! Our team will get back to you soon.
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('complaintForm');
+        const successMessage = document.getElementById('successMessage');
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            let name = document.getElementById('name').value;
+            let email = document.getElementById('email').value;
+            let type = document.getElementById('type').value;
+            let complaint = document.getElementById('complaint').value;
+
+            // Save complaint in localStorage
+            let complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+            complaints.push({ name, email, type, complaint, status: "Pending Review" });
+            localStorage.setItem("complaints", JSON.stringify(complaints));
+
+            alert(`🎉 Thank you, ${name}! Your ${type} complaint has been recorded.`);
+
+            successMessage.style.display = 'block';
+            form.reset();
+        });
+    </script>
+</body>
+
+</html>
