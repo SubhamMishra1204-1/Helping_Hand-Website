@@ -27,7 +27,7 @@ helping-hand/
 
 Clone or download this repository.
 
-git clone https://github.com/your-username/helping-hand.git
+git clone https://github.com/SubhamMishra1204-1/Helping_Hand-Website.git
 
 
 Open index.html in your browser.
