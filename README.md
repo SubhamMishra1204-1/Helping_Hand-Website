@@ -36,9 +36,9 @@ Submit a complaint by filling out the form.
 
 Go to status.html, enter your email, and check the complaint status.
 
-🌐 Demo (if using GitHub Pages)
 
-Live Demo Link
+
+
 
 🛠️ Technologies Used
 
